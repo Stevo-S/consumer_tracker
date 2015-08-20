@@ -1,0 +1,34 @@
+<%- model_class = Tag -%>
+<div class="page-header">
+  <h1><%#=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
+</div>
+<%#= render :partial => 'form' %>
+<div class="container">
+<%= form_tag( {controller: "tags", action: "create"}, class: 'form-inline' ) do  %>
+    <div class="input-group col-md-2">
+       <%= number_field_tag 'number_of_tags', '1', min: 1, max: 1000 , class: 'form-control'%>		
+       <span class="input-group-addon">tags</span>
+    </div>
+    <div class="input-group col-md-2">
+       <span class="input-group-addon">Prefix</span>
+       <%= text_field_tag 'prefix', '', maxlength: 3, class: 'form-control', placeholder: 'Enter a prefix'%>		
+    </div>
+    <span>
+	  &nbsp;<strong>Range:</strong>&nbsp;
+    </span>
+    <div class="input-group col-md-2">
+       <span class="input-group-addon" >Between</span>
+       <%= number_field_tag 'minimum', '0', min: 1, class: 'form-control' %>			
+    </div>
+    <div class="input-group col-md-2">
+       <span class="input-group-addon" >and</span>
+       <%= number_field_tag 'maximum', '10', min: 10, class: 'form-control' %>			
+    </div>
+
+    <br />
+
+    <div class="input-group" style="padding-top: 15px">
+	<%= submit_tag 'Generate!', class: 'btn btn-lg btn-info' %>
+    </div>
+<% end %>
+</div>

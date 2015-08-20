@@ -1,0 +1,82 @@
+<%- model_class = Product -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<%= search_form_for @q, html: {class: 'form-inline'} do |f| %>
+   <%= f.label :id_eq, 'ID' %>
+   <%= f.search_field :id_eq, class: 'form-control' %>
+   &nbsp;
+   <%= f.label :name_cont, 'Name' %>
+   <%= f.search_field :name_cont, class: 'form-control' %>
+   <%= f.label :confirmed_eq, 'Confirmed' %>
+   <%= f.collection_select :confirmed_eq, [true, false], :to_s, :to_s, {include_blank: 'Any'}, {class: 'form-control' } %>
+   <br>
+	created between 
+   <%= f.date_field :created_at_gt, class: 'form-control' %>
+	and
+   <%= f.date_field :created_at_lt, class: 'form-control' %>
+   <%= f.submit 'filter', class: 'btn btn-lg btn-info' %>
+<% end %>
+
+<hr>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:barcode) %></th>
+      <th><%= model_class.human_attribute_name(:manufacturer) %></th>
+      <th><%= model_class.human_attribute_name(:supplier) %></th>
+      <th><%= model_class.human_attribute_name(:retailer) %></th>
+      <!--th><%#= model_class.human_attribute_name(:tag) %></th-->
+      <th><%= model_class.human_attribute_name(:confirmed) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+          <td><%= product.name %></td>
+          <td><%= product.barcode %></td>
+          <td><%= product.manufacturer %></td>
+          <td><%= product.supplier %></td>
+          <td><%= product.retailer %></td>
+          <!--td><%#= product.tag %></td-->
+          <td>
+	  	<% if product.confirmed then %>
+		    <%= image_tag "button-check_green.png" %>
+		<% else %>
+		    <%= image_tag "button-cross_red.png" %>
+		<% end %>
+	  </td>
+        <td><%=l product.created_at, format: :long %></td>
+        <td>
+          <% product_details_link = link_to product_path(product), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+          <%- end -%>
+	  <%= content_tag :span, product_details_link %>
+          <%= link_to edit_product_path(product), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to product_path(product), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_product_path,
+            :class => 'btn btn-primary' %>
+<hr />
+<%= form_tag import_products_path, multipart: true, class: 'form-inline' do %>
+    <%= file_field_tag :file %>
+    <br>
+    <%= submit_tag "Import from file", class: 'btn btn-lg btn-info' %>
+<% end %>

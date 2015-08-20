@@ -1,0 +1,38 @@
+<%- model_class = Product -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<div id="qrcontainer">
+QR Code
+    <%= image_tag(@product.qr_code_url) if @product.qr_code?  %>
+</div>
+
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @product.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:barcode) %></dt>
+      <dd><pre class="prettyprint"><%= @product.barcode %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:manufacturer) %></dt>
+      <dd><pre class="prettyprint"><%= @product.manufacturer %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:supplier) %></dt>
+      <dd><pre class="prettyprint"><%= @product.supplier %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:retailer) %></dt>
+      <dd><pre class="prettyprint"><%= @product.retailer %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:tag) %></dt>
+      <dd><pre class="prettyprint"><%= @product.tag %></pre></dd>
+  </dl>
+</div>
+
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              products_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_product_path(@product), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              product_path(@product),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
