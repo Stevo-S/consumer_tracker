@@ -2,6 +2,10 @@ ActiveAdmin.register_page "Dashboard" do
 
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
+  sidebar :Categories, priority: 0 do
+    p 'TODO: Add categories'
+  end
+
   content title: proc{ I18n.t("active_admin.dashboard") } do
 # div class: "blank_slate_container", id: "dashboard_default_message" do
 #       span class: "blank_slate" do
@@ -29,26 +33,61 @@ ActiveAdmin.register_page "Dashboard" do
     #     end
     #   end
     # end
+    
 
     columns do
 	column do
-	    panel "Statistics" do
-		columns do
-		    column id: 'products_stats' do
-			h1 pluralize Product.all.count, "product"
-		    end
-		    column do
-			h1 pluralize Account.all.count, "account"
-		    end
-		    column do
-			h1 pluralize User.all.count, "user"
-		    end
-		    column do
-			h1 pluralize IncomingMessage.all.count, "incoming message"
-		    end
-		end
+	    panel "PRODUCTS" do
+		h1 Product.all.count
+	    end
+	end
+	column do
+	    panel "ACCOUNTS" do
+		h1 Account.all.count
+	    end
+	end
+	column do
+	    panel "USERS" do
+		h1 User.all.count
+	    end
+	end
+	column do
+	    panel "RECEIVED MESSAGES" do
+		h1 IncomingMessage.all.count
 	    end
 	end
     end
+
+    br
+
+    columns do
+	column max_width: "320px" do
+	    panel 'PRODUCTS', id: 'chart' do
+		canvas id: 'pie_canvas'
+	    end
+	    panel 'Top 5 Products' do
+		canvas id: 'bar_chart_canvas'
+		render 'bar_chart'
+	    end
+	    render 'pie_chart'
+	end
+
+	column min_width: "525px" do
+	    panel 'Messages' do
+		canvas id: 'canvas', height: "360", width: "500"
+	    end
+	    render 'line_chart'
+	end
+    end # end of row 1
+
+    columns do
+	column max_width: 700 do
+	    panel 'Categories' do
+		canvas id: 'categories_bar_chart_canvas', height: "350", width: "600"
+		render 'categories_bar_chart'
+	    end
+	end
+    end
+
   end # content
 end

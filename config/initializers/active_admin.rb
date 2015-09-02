@@ -234,4 +234,5 @@ ActiveAdmin.setup do |config|
 
 
   config.register_javascript 'd3.js'
+  config.register_javascript 'Chart.js'
 end

@@ -14,5 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require d3
+//= require Chart
+//= require excanvas
 //= require turbolinks
 //= require_tree .

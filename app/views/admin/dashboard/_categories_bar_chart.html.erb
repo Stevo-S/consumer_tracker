@@ -1,0 +1,28 @@
+<script>
+    var data = {
+	labels: ["Electronics", "Mobile Phones", "Sports & Fitness", "Books", 
+			"Fashion", "Tablets & Accessories", "Home & Living", "Computing & Accessories", "Baby, Kids & Toys"],
+
+	datasets: [
+	{
+	    label: "Total",
+	   fillColor: "rgba(220,220,220,0.5)",
+	   strokeColor: "rgba(220,220,220,0.8)",
+	   highlightFill: "rgba(220,220,220,0.75)",
+	   highlightStroke: "rgba(220,220,220,1)",
+	   data: [65509, 12539, 86803, 72817, 34568, 25554, 45401, 68628, 75929]
+	},
+	{
+	   label: "Confirmed",
+	   fillColor: "rgba(151,187,205,0.5)",
+	   strokeColor: "rgba(151,187,205,0.8)",
+	   highlightFill: "rgba(151,187,205,0.75)",
+	   highlightStroke: "rgba(151,187,205,1)",
+	   data: [16052, 22439, 34493, 44297, 54576, 65249, 74301, 65232, 14960, 20015]
+	}
+    ]
+    };
+
+    var context = $("#categories_bar_chart_canvas").get(0).getContext("2d");
+    var barChart = new Chart(context).Bar(data);
+</script>

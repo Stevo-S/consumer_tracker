@@ -82,8 +82,13 @@ gem 'simple_form'
 
 # Use Active Admin
 gem 'activeadmin', '~> 1.0.0.pre1'
+gem 'active_admin_sidebar'
 gem 'devise'
 
 
 # Use D3 for data visualisations
 gem 'd3-rails'
+
+# Trying out chart.js
+# gem 'chart-js-rails'
+gem 'chartjs-ror'

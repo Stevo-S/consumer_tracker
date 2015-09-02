@@ -1,0 +1,19 @@
+<script>
+    var data = [
+	{
+	   value: 300,
+	   color: "#F7464A",
+	   highlight: "#FF5A5E",
+	   label: "Confirmed"
+	},
+	{
+	       value: 50,
+	       color: "#46BFBD",
+	       highlight: "#5AD3D1",
+	       label: "Unconfirmed"
+	}
+    ];
+
+    var context = $("#pie_canvas").get(0).getContext("2d");
+    var pieChart = new Chart(context).Pie(data);
+</script>

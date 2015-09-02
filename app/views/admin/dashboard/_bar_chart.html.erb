@@ -1,0 +1,27 @@
+<script>
+    var data = {
+	labels: ["iPhone", "Red Bull", "Nike", "Bailey's", "Bic"],
+
+	datasets: [
+	{
+	    label: "Total",
+	   fillColor: "rgba(220,220,220,0.5)",
+	   strokeColor: "rgba(220,220,220,0.8)",
+	   highlightFill: "rgba(220,220,220,0.75)",
+	   highlightStroke: "rgba(220,220,220,1)",
+	   data: [655, 539, 803, 817, 568, 555, 401]
+	},
+	{
+	   label: "Confirmed",
+	   fillColor: "rgba(151,187,205,0.5)",
+	   strokeColor: "rgba(151,187,205,0.8)",
+	   highlightFill: "rgba(151,187,205,0.75)",
+	   highlightStroke: "rgba(151,187,205,1)",
+	   data: [605, 439, 493, 97, 76, 549, 401]
+	}
+    ]
+    };
+
+    var context = $("#bar_chart_canvas").get(0).getContext("2d");
+    var barChart = new Chart(context).Bar(data);
+</script>

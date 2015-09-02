@@ -1,0 +1,100 @@
+<script>
+    d3.select("#products_stats").append("p").text("D3 + rails Baby!");
+
+    var dataset = [];
+    var w = 1000;
+    var h = 100;
+    var barPadding = 1;
+    for(i = 0; i < 50; i++)
+    {
+	dataset.push(Math.round(Math.random() * 100));
+    }
+    var svg = d3.select("#products_stats")
+    		.append("svg")
+		.attr("width", w)
+		.attr("height", function(d){
+			    return d;
+			});
+
+    svg.selectAll("rect")
+    	.data(dataset)
+    	.enter()
+    	.append("rect")
+	.attr("x", function(d, i){
+		    return i * (w/dataset.length);
+		})
+	.attr("y", function(d){
+		    return h - d;
+		})
+	.attr("width", w / dataset.length - barPadding)
+	.attr("height", function(d){
+		    return d;
+		})
+	.attr("fill", function(d) {
+		return "rgb(0, 0, " + (d * 10) + ")";
+		});
+
+    svg.selectAll("text")
+    	.data(dataset)
+	.enter()
+    	.append("text")
+	.text(function(d) {
+		return d;
+		})
+	.attr("x", function(d, i) {
+		return i * (w / dataset.length) + (w /dataset.length - barPadding) / 2;
+		})
+	.attr("y", function(d) {
+		return h - ( d) + 14;
+		})
+	.attr("font-family", "sans-serif")
+	.attr("font-size", "11px")
+	.attr("fill", "yellow")
+	.attr("text-anchor", "middle");
+
+	// pie chart
+	/*var dataset2 = [
+	    { label: 'Abulia', count: 10 },
+	    { label: 'Betelgeuse', count: 20 },
+	    { label: 'Cantaloupe', count: 30 },
+	    { label: 'Dijkstra', count: 40 }
+	];
+	*/
+
+	var dataset2 = [
+		{ label: 'Confirmed', count: 234 },
+		{ label: 'Unconfirmed', count: 432 }
+	    ];
+	var pWidth = 300;
+	var pHeight = 360;
+	var pRadius = Math.min(pWidth, pHeight) / 2;
+
+	var color = d3.scale.category10();
+	var svg = d3.select('#chart')
+		.append('svg')
+		.attr('width', pWidth)
+		.attr('height', pHeight)
+		.append('g')
+		.attr('transform', 'translate(' + (pWidth/2) + ',' + (pHeight/2) + ')');
+
+	var arc = d3.svg.arc().outerRadius(pRadius).innerRadius(0);
+	var pie = d3.layout.pie()
+		.value(function(d) { return d.count; })
+		.sort(null);
+
+	var path = svg.selectAll('g')
+		.data(pie(dataset2))
+		.enter()
+		.append('g')
+		.append('path')
+		.attr('d', arc)
+		.attr('fill', function(d, i) {
+		    return color(d.data.label);
+		    });
+
+	var gee = svg.selectAll('g')
+	    .append("text")
+	    .attr("transform", function(d, i) { return "translate(" + arc.centroid(d, i) + ")"; })
+	    .text(function(d) { return d.data.label + ' ' + d.data.count; })
+	    .attr('fill', 'black');
+</script>
