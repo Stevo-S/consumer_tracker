@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @account = Account.new(name: params.delete(:account))	
+    @account = Account.new(name: params[:user].delete(:account))	
     @user = User.new user_params
     @user.account_id = @account.id
 

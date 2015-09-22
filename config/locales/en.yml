@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+
+
+  active_admin:
+    powered_by: "Consumer Tracker &copy; 2015"

@@ -9,15 +9,9 @@ ActiveAdmin.register_page "Dashboard" do
 	end
 
 	ul do
-	    li 'Electronics'
-	    li 'Mobile Phones'
-	    li 'Sports and Fitness'
-	    li 'Books'
-	    li 'Fashion'
-	    li 'Tablets and Accessories'
-	    li 'Home and Living'
-	    li 'Computing and Accessories'
-	    li 'Baby, Kids and Toys'
+	    Category.all.each do |category|
+		li category.name
+	    end
 	end
     end
   end

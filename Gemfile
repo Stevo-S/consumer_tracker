@@ -76,6 +76,7 @@ gem 'rails-i18n'
 
 # use carrierwave for uploading files
 gem 'carrierwave'
+gem 'mini_magick'
 
 # Use simple_form for building forms
 gem 'simple_form'

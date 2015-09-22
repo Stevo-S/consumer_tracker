@@ -20,6 +20,7 @@
 <% end %>
 
 <hr>
+<%= paginate @products %>
 
 <table class="table table-striped">
   <thead>
@@ -70,6 +71,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @products %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_product_path,

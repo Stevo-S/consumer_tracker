@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @q = Product.where(account_id: current_user.account_id).ransack(params[:q])
-    @products = @q.result(distinct: true)
+    @products = @q.result(distinct: true).page params[:page]
   end
 
   # GET /products/1
@@ -25,16 +25,18 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /products
   # POST /products.json
   def create
     @product = Product.new(product_params)
-    min = 123456789
-    max = 9999999999999999
+#min = 123456789
+#   max = 9999999999999999
 
-    @product.tag = Random.new.rand(min...max).to_s
+#   @product.tag = Random.new.rand(min...max).to_s
+    @product.add_tag
 
     respond_to do |format|
       if @product.save

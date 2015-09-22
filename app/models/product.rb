@@ -3,6 +3,9 @@ require 'carrierwave/orm/activerecord'
 
 class Product < ActiveRecord::Base
 
+    belongs_to :category
+    belongs_to :account
+
     mount_uploader :qr_code, QrCodeUploader
 
     def self.import(file)
@@ -34,5 +37,9 @@ class Product < ActiveRecord::Base
 
     def self.updateable_params
 	[:name, :manufacturerproducer, :supplier, :retailer, :tag]
+    end
+
+    def add_tag(min = 1000000000, max =  9999999999)
+	self.tag = Random.new.rand(min...max).to_s	
     end
 end

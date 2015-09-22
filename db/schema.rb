@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150829101252) do
+ActiveRecord::Schema.define(version: 20150914221406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,14 @@ ActiveRecord::Schema.define(version: 20150829101252) do
   add_index "incoming_messages", ["message"], name: "index_incoming_messages_on_message", using: :btree
   add_index "incoming_messages", ["sender"], name: "index_incoming_messages_on_sender", using: :btree
 
+  create_table "main_slides", force: true do |t|
+    t.string   "picture"
+    t.text     "heading"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "outgoing_messages", force: true do |t|
     t.string   "recipient"
     t.text     "message"
@@ -83,8 +91,30 @@ ActiveRecord::Schema.define(version: 20150829101252) do
   add_index "outgoing_messages", ["message"], name: "index_outgoing_messages_on_message", using: :btree
   add_index "outgoing_messages", ["recipient"], name: "index_outgoing_messages_on_recipient", using: :btree
 
-# Could not dump table "products" because of following StandardError
-#   Unknown type 'categories' for column 'references'
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.string   "manufacturer"
+    t.string   "supplier"
+    t.string   "retailer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "tag"
+    t.string   "barcode"
+    t.string   "qr_code"
+    t.boolean  "confirmed"
+    t.integer  "account_id"
+    t.integer  "category_id"
+  end
+
+  add_index "products", ["account_id"], name: "index_products_on_account_id", using: :btree
+  add_index "products", ["barcode"], name: "index_products_on_barcode", unique: true, using: :btree
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
+  add_index "products", ["manufacturer"], name: "index_products_on_manufacturer", using: :btree
+  add_index "products", ["name"], name: "index_products_on_name", using: :btree
+  add_index "products", ["qr_code"], name: "index_products_on_qr_code", using: :btree
+  add_index "products", ["retailer"], name: "index_products_on_retailer", using: :btree
+  add_index "products", ["supplier"], name: "index_products_on_supplier", using: :btree
+  add_index "products", ["tag"], name: "index_products_on_tag", unique: true, using: :btree
 
   create_table "senders", force: true do |t|
     t.string   "phone"

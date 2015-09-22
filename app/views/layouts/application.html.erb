@@ -40,7 +40,7 @@
 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
+       <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -54,7 +54,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li <%=  current_page?(controller: 'products') ? 'class=active' : '' %> ><%= link_to "Products", products_path %></li>
+            <li <%=  current_page?(controller: 'products') ? 'class=active' : '' %> >
+		<%= link_to "Products", products_path %>
+	    </li>
+	    <li <%= current_page?('/stats' ) ? 'class=active' : '' %> >
+	    	<%= link_to "Statistics", stats_path %>
+	    </li>
           </ul>
 
 	  <ul class="nav navbar-nav navbar-right">
@@ -79,7 +84,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-9">
+        <div >
           <%= bootstrap_flash %>
           <%= yield %>
         </div>

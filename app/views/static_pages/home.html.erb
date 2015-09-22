@@ -1,3 +1,41 @@
+<%= content_tag :div,id: "main_slider", class: "carousel slide", data: {ride: 'carousel'} do %>
+
+    <%= content_tag :ol, class: "carousel-indicators" do %>
+	<% @slides.each_with_index do |slide, i| %>
+	   <% if i == 0  then%> 
+	       <%= content_tag :li, '', data: {target: "#main_slider", slide_to: 0 }, class: "active" %>
+	   <% else %>
+	       <%= content_tag :li, '', data: {target: "#main_slider", slide_to: i} %>
+	   <% end %>
+        <% end %>
+    <% end %>
+    <!-- End of Carousel indicators -->
+
+    <%= content_tag :div, class: 'carousel-inner', role: 'listbox' do %>
+	<% @slides.each_with_index do |slide, i| %>
+	    <%= content_tag :div, class: 'item' + (i == 0 ? ' active' : '') do %>
+		<%= image_tag slide.picture_url, class: "center-block"  %>
+		<%= content_tag :div, class: "container" do %>
+		    <%= content_tag :div, class: "carousel-caption" do %>
+			<%= content_tag :h3, slide.heading %>
+			<%= content_tag :p, slide.description %>
+		    <% end %>
+		<% end %>
+	    <% end %>
+	<% end %>
+    <% end %>
+
+    <!-- Carousel Controls-->
+    <%= link_to "#main_slider", class: "left carousel-control", role: "button", data: {slide: "prev"} do %>
+	<%= content_tag :span, '', class: "glyphicon glyphicon-chevron-left", aria_hidden: "true" %>
+	<%= content_tag :span, "Previous", class: "sr-only" %>
+    <% end %>
+    <%= link_to "#main_slider", class: "right carousel-control", role: "button", data: {slide: "next"} do %>
+	<%= content_tag :span, '', class: "glyphicon glyphicon-chevron-right", aria_hidden: "true" %>
+	<%= content_tag :span, "Next", class: "sr-only" %>
+    <% end %>
+<% end %>
+<!-- End of Carousel-->
 <div class="jumbotron">
 <h1>Welcome to Consumer Tracker</h1>
 <p>This apps lets you keep track of your products by allowing enquiries from the field using your mobile device,

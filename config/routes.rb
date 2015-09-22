@@ -1,5 +1,8 @@
 ConsumerTracker::Application.routes.draw do
 
+  get 'analytics/stats'
+  get 'stats' => 'analytics#stats'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get  'log_in' => 'sessions#new'
