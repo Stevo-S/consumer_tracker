@@ -14,6 +14,29 @@ ActiveAdmin.register Account do
   #   permitted
   # end
 
-  permit_params :name
+  remove_filter :accounts_account_types
 
+  permit_params :name, account_type_ids: [] 
+
+  form do |f|
+    f.inputs "Account Details" do
+      f.input :name
+      f.input :account_types, as: :check_boxes
+    end
+
+    f.actions
+  end
+
+  show do |account|
+    attributes_table do
+	row :name
+	row :account_types do
+	    account.account_types.each do |type|
+		li type.name
+	    end
+	end
+    end
+
+    active_admin_comments
+  end
 end

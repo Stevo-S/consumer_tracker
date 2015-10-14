@@ -1,5 +1,7 @@
 ConsumerTracker::Application.routes.draw do
 
+  get 'api_test/hello'
+
   get 'analytics/stats'
   get 'stats' => 'analytics#stats'
 
@@ -33,6 +35,9 @@ ConsumerTracker::Application.routes.draw do
   resources :messages
 
   resources :users
+
+  get 'faceboot' => 'static_pages#faceboot'
+  get 'trinity' => 'static_pages#trinity'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

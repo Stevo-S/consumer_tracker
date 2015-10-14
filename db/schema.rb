@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914221406) do
+ActiveRecord::Schema.define(version: 20151014213403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "account_types_accounts", id: false, force: true do |t|
+    t.integer "account_id",      null: false
+    t.integer "account_type_id", null: false
+  end
+
+  add_index "account_types_accounts", ["account_id", "account_type_id"], name: "index_account_types_accounts_on_account_id_and_account_type_id", using: :btree
+  add_index "account_types_accounts", ["account_type_id", "account_id"], name: "index_account_types_accounts_on_account_type_id_and_account_id", using: :btree
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -90,6 +104,14 @@ ActiveRecord::Schema.define(version: 20150914221406) do
 
   add_index "outgoing_messages", ["message"], name: "index_outgoing_messages_on_message", using: :btree
   add_index "outgoing_messages", ["recipient"], name: "index_outgoing_messages_on_recipient", using: :btree
+
+  create_table "points_bags", force: true do |t|
+    t.integer  "gold",       default: 0
+    t.integer  "silver",     default: 0
+    t.integer  "bronze",     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "products", force: true do |t|
     t.string   "name"

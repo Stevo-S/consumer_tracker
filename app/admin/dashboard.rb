@@ -2,19 +2,19 @@ ActiveAdmin.register_page "Dashboard" do
 
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
-  sidebar :Categories, priority: 0 do
-    details do
-	summary do
-	    strong 'Categories list'
-	end
-
-	ul do
-	    Category.all.each do |category|
-		li category.name
-	    end
-	end
-    end
-  end
+#  sidebar :Categories, priority: 0 do
+#    details do
+#	summary do
+#	    strong 'Categories list'
+#	end
+#
+#	ul do
+#	    Category.all.each do |category|
+#		li category.name
+#	    end
+#	end
+#    end
+#  end
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
 # div class: "blank_slate_container", id: "dashboard_default_message" do
@@ -58,6 +58,7 @@ ActiveAdmin.register_page "Dashboard" do
 	end
 	column do
 	    panel "USERS" do
+	    	span class: "glyphicon glyphicon-user", aria_hidden: true
 		h1 User.all.count
 	    end
 	end
@@ -78,14 +79,14 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
 	column  do
 	    panel 'Categories' do
-		canvas id: 'categories_bar_chart_canvas', height: "350", width: "400"
+		canvas id: 'categories_bar_chart_canvas', height: "350", width: "500"
 		render 'categories_bar_chart'
 	    end
 	end
 
 	column  do
 	    panel 'Messages' do
-		canvas id: 'canvas', height: "360", width: "400"
+		canvas id: 'canvas', height: "360", width: "500"
 	    end
 	    render 'line_chart'
 	end

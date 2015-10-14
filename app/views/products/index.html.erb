@@ -3,20 +3,39 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 
-<%= search_form_for @q, html: {class: 'form-inline'} do |f| %>
-   <%= f.label :id_eq, 'ID' %>
-   <%= f.search_field :id_eq, class: 'form-control' %>
-   &nbsp;
-   <%= f.label :name_cont, 'Name' %>
-   <%= f.search_field :name_cont, class: 'form-control' %>
-   <%= f.label :confirmed_eq, 'Confirmed' %>
-   <%= f.collection_select :confirmed_eq, [true, false], :to_s, :to_s, {include_blank: 'Any'}, {class: 'form-control' } %>
+<%= search_form_for @q, html: {class: 'navbar-form'} do |f| %>
+<div class="row">
+   <div class="input-group col-md-3">
+       <span class="input-group-addon">ID</span>
+       <%= f.search_field :id_eq, class: 'form-control' %>
+   </div>
+   <div class="input-group col-md-3">
+       <span class="input-group-addon">Name</span>
+       <%= f.search_field :name_cont, class: 'form-control' %>
+   </div>
+   <div class="input-group">
+       <span class="input-group-addon">Confirmed</span>
+       <%= f.collection_select :confirmed_eq, [true, false], :to_s, :to_s, {include_blank: 'Any'}, {class: 'form-control' } %>
+       </div>
+   </div>
    <br>
-	created between 
-   <%= f.date_field :created_at_gt, class: 'form-control' %>
-	and
-   <%= f.date_field :created_at_lt, class: 'form-control' %>
-   <%= f.submit 'filter', class: 'btn btn-lg btn-info' %>
+<div class="row">
+   <div class="input-group col-md-3">
+       <span class="input-group-addon"> between</span>
+       <%= f.date_field :created_at_gt, class: 'form-control' %>
+   </div>
+   <div class="input-group col-md-3">
+       <span class="input-group-addon">and</span>
+       <%= f.date_field :created_at_lt, class: 'form-control' %>
+   </div>
+   </div>
+    <br>
+
+   <div class="row">
+   <div class="input-group">
+       <%= f.submit 'filter', class: 'btn btn-info' %>
+    </div>
+    </div>
 <% end %>
 
 <hr>
